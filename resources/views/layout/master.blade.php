@@ -6,7 +6,7 @@
     <title>@yield('title')</title>
     @include('layout.bootstrap')
 </head>
-<body>
+<body class="overflow-hidden">
     @include('layout.header')
 
     @yield('content')
