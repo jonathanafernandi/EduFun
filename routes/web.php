@@ -28,3 +28,5 @@ Route::get('/writer/{id}', [WriterController::class, 'profile'])->name('writer.p
 Route::get('/about-us', function() {
     return view('about.about-us');
 })->name('about-us');
+
+Route::get('/popular', [ArticleController::class, 'popular'])->name('popular');

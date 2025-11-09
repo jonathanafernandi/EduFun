@@ -32,4 +32,9 @@ class ArticleController extends Controller
                     ->get();
         return view('category.network-security', compact('articles'));
     }
+
+    public function popular() {
+        $articles = Article::with(['writer', 'category'])->paginate(3);
+        return view('popular.popular', compact('articles'));
+    }
 }

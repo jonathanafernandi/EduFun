@@ -29,7 +29,7 @@
                             <a class="nav-link @yield('nav-link-about-us')" href="{{ route('about-us') }}">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @yield('nav-link-popular')" href="#">Popular</a>
+                            <a class="nav-link @yield('nav-link-popular')" href="{{ route('popular') }}">Popular</a>
                         </li>
                     </ul>
                 </div>
