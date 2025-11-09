@@ -18,15 +18,15 @@
                                 Category
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Data Science</a></li>
-                                <li><a class="dropdown-item" href="#">Network Security</a></li>
+                                <li><a class="dropdown-item" href="{{ route('category.data-science') }}">Data Science</a></li>
+                                <li><a class="dropdown-item" href="{{ route('category.network-security') }}">Network Security</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @yield('nav-link-writers')" href="#">Writers</a>
+                            <a class="nav-link @yield('nav-link-writers')" href="{{ route('writers') }}">Writers</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link @yield('nav-link-about-us')" href="#">About Us</a>
+                            <a class="nav-link @yield('nav-link-about-us')" href="{{ route('about-us') }}">About Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @yield('nav-link-popular')" href="#">Popular</a>

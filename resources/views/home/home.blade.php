@@ -21,7 +21,9 @@
                             {{ $article->title }}
                         </div>
                         <div class="row fw-light">
-                            {{ $article->posted_at->format('j F Y') }} | by: {{ Str::words($article->writer->name, 1, '') }}
+                            <div class="p-0">
+                                {{ $article->posted_at->format('j F Y') }} | by: <a href="{{ route('writer.profile', $id=$article->writer->id) }}" class="text-dark text-decoration-none">{{ Str::words($article->writer->name, 1, '') }}</a>
+                            </div>
                         </div>
                         <div class="row">
                             {{ Str::words($article->short_info, 15) }}
@@ -31,6 +33,5 @@
                 </div>
             @endforeach
         </div>
-        
     </div>
 @endsection

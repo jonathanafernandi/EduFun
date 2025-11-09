@@ -11,8 +11,10 @@
                 </div>
             </div>
             <div class="d-flex flex-column px-4 gap-3">
-                <div class="row">
-                    {{ $article->posted_at->format('j F Y') }} | by: {{ Str::words($article->writer->name, 1, '') }}
+                <div class="row fw-light">
+                    <div class="p-0">
+                        {{ $article->posted_at->format('j F Y') }} | by: <a href="{{ route('writer.profile', $id=$article->writer->id) }}" class="text-dark text-decoration-none">{{ Str::words($article->writer->name, 1, '') }}</a>
+                    </div>
                 </div>
                 <div class="row">
                     {!! nl2br($article->short_info) !!}

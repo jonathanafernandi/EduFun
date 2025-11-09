@@ -7,10 +7,12 @@
     @include('layout.bootstrap')
     <link rel="shortcut icon" href="{{ asset('img/logo/EduFunLogo.png') }}" type="image/x-icon">
 </head>
-<body class="bg-light" style="overflow-x: hidden;">
+<body class="bg-light d-flex flex-column min-vh-100" style="overflow-x: hidden;">
     @include('layout.header')
 
-    @yield('content')
+    <main class="flex-grow-1 d-flex flex-column">
+        @yield('content')
+    </main>
 
     @include('layout.footer')
 </body>

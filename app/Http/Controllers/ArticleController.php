@@ -18,4 +18,18 @@ class ArticleController extends Controller
         $article = Article::with(['writer', 'category'])->findOrFail($article_id);
         return view('article.details', compact('article'));
     }
+
+    public function dataScience() {
+        $articles = Article::with(['writer', 'category'])
+                    ->where('category_id', '1')
+                    ->get();
+        return view('category.data-science', compact('articles'));
+    }
+
+    public function networkSecurity() {
+        $articles = Article::with(['writer', 'category'])
+                    ->where('category_id', '2')
+                    ->get();
+        return view('category.network-security', compact('articles'));
+    }
 }
