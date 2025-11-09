@@ -14,3 +14,5 @@ use App\Http\Controllers\ArticleController;
 // })->name('home');
 
 Route::get('/', [ArticleController::class, 'home'])->name('home');
+
+Route::get('/article/{id}', [ArticleController::class, 'details'])->name('article.details');

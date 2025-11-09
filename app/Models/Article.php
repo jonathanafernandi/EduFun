@@ -14,6 +14,10 @@ class Article extends Model
         return $this->belongsTo(Writer::class);
     }
 
+    protected $casts = [
+        'posted_at'=>'date'
+    ];
+
     public function category() {
         return $this->belongsTo(Category::class);
     }

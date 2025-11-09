@@ -10,7 +10,12 @@ use App\Models\Category;
 class ArticleController extends Controller
 {
     public function home() {
-        $articles = Article::with(['writer', 'category'])->get();
+        $articles = Article::with(['writer', 'category'])->latest('posted_at')->get();
         return view('home.home', compact('articles'));
+    }
+
+    public function details($article_id) {
+        $article = Article::with(['writer', 'category'])->findOrFail($article_id);
+        return view('article.details', compact('article'));
     }
 }
