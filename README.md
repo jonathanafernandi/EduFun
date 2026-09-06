@@ -1,66 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EduFun
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+EduFun is a Laravel-based educational content platform prototype built for PT EduFun, a fictional company that provides free IT-related learning materials to students. This implementation focuses on the **Data Science** and **Network Security** categories, developed as a midterm exam practice for the COMP6821001 – Web Development course.
 
-## About Laravel
+## Table of Contents
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Laravel Components](#laravel-components)
+- [Database Schema](#database-schema)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Author](#author)
+- [Notes](#notes)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+EduFun centralizes learning content across specific IT fields. This implementation covers two categories, **Data Science** and **Network Security**. The platform is user-facing only, with no admin panel, focusing on making educational articles easy to browse, read, and attribute to their writers.
 
-## Learning Laravel
+## Project Structure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+EduFun/
+├── app/
+│   ├── Http/Controllers/
+│   │   ├── ArticleController.php
+│   │   └── WriterController.php
+│   └── Models/
+│       ├── Article.php
+│       ├── Category.php
+│       └── Writer.php
+├── database/
+│   ├── migrations/
+│   │   ├── xxxx_create_writers_table.php
+│   │   ├── xxxx_create_categories_table.php
+│   │   └── xxxx_create_articles_table.php
+│   └── seeders/
+│       ├── WriterSeeder.php
+│       ├── CategorySeeder.php
+│       └── ArticleSeeder.php
+├── resources/views/
+│   ├── layout/
+│   ├── home/
+│   ├── article/
+│   ├── category/
+│   ├── writer/
+│   ├── about/
+│   └── popular/
+├── routes/
+│   └── web.php
+├── docs/
+│   ├── COMP6821001-WebDev_LatihanUTS.pdf
+│   └── EduFun.pdf
+├── .env.example
+├── .gitignore
+└── README.md
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Tech Stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Layer | Technology |
+|---|---|
+| Backend Framework | Laravel |
+| Frontend Styling | Bootstrap |
+| Database | MySQL (via phpMyAdmin) |
+| Language | PHP |
 
-## Laravel Sponsors
+## Laravel Components
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+The application follows Laravel's MVC architecture:
 
-### Premium Partners
+- **Routes**: `ArticleController` handles routing to the Home Page, Article Detail Page, Category Pages, and Popular Page. `WriterController` handles routing to the Writers Page and Profile Page. The About Us Page is routed directly without a controller.
+- **Controllers**:
+  - `ArticleController` retrieves data from the `Article`, `Writer`, and `Category` models and returns it to the Home, Detail, Category, and Popular views.
+  - `WriterController` retrieves data from the `Writer` and `Article` models and returns it to the Writers and Profile views.
+- **Models**: `Writer` and `Article` have a one-to-many relationship; `Category` and `Article` also have a one-to-many relationship.
+- **Views (Blade)**: organized by feature folder — `layout` (Bootstrap CSS/JS, header, footer, master page), `home`, `article`, `category`, `writer`, `about`, and `popular`.
+- **Migrations**: create the `writers`, `categories`, and `articles` tables.
+- **Seeders**: `WriterSeeder`, `CategorySeeder`, and `ArticleSeeder` populate the database with test data.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Database Schema
 
-## Contributing
+| Table | Key Columns |
+|---|---|
+| `writers` | `id`, `image_url`, `name`, `specialization` (enum: Data Science Specialist / Network Security Specialist), timestamps |
+| `categories` | `id`, `name`, timestamps |
+| `articles` | `id`, `category_id` (FK), `title`, `image_url`, `posted_at`, `writer_id` (FK), `short_info`, timestamps |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Features
 
-## Code of Conduct
+### Main Features
+- **Home Page** - displays navigation (Home, Category, Writers, About Us) along with a preview of the latest articles, including title, short description, posting date, and author.
+- **Category Page** - lists available categories: **Data Science** and **Network Security**.
+- **Detail Page** - shows full article content per category:
+  - *Data Science*: Machine Learning, Deep Learning, Natural Language Processing
+  - *Network Security*: Software Security, Network Administration, Popular Network Technology
+- **Writers Page** - lists all content writers.
+- **Profile Page** - shows a writer's specialization and the articles they have authored.
+- **About Us Page** - a short description of the EduFun platform.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Optional (Challenge) Features
+- **Popular Page** - displays currently popular articles across 2 paginated pages (3 articles per page), with clickable page numbers.
 
-## Security Vulnerabilities
+## Getting Started
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Prerequisites
 
-## License
+- PHP 8.1+
+- Composer
+- MySQL / phpMyAdmin
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Installation
+
+```bash
+git clone https://github.com/<username>/EduFun.git
+cd EduFun
+composer install
+cp .env.example .env
+php artisan key:generate
+```
+
+Configure your database credentials in `.env`, then run:
+
+```bash
+php artisan migrate --seed
+php artisan serve
+```
+
+Visit `http://localhost:8000` to view the application.
+
+## Author
+
+**Jonathan Alvindo Fernandi**  
+Computer Science, School of Computer Science, Bina Nusantara University  
+Course: COMP6821001 – Web Development
+
+## Notes
+
+Full specification and implementation report are available in the `docs/` folder.
